@@ -18,23 +18,23 @@ import { deepComputed } from '@ngrx/signals';
   Sum: {{sum()}}
   <div></div>
   <!-- Notice how we can reference using counters.property() -->
-  NestedCounterVals: FIRST:{{counters.first()}} , SECOND:{{counters.second()}}
+  NestedCounterVals: FIRST:{{counters.first()}} , SECOND:{{counters.second()}}, SUM: {{counters.sum()}}
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeepComputedComponent {
     firstCount = signal(0);
     secondCount = signal(0);
+    sum = computed(() => this.calculateSum());
+    calculateSum = () => this.firstCount() + this.secondCount();
+
 
     // We can use `deepComputed` to create a top level object of signals that can each be independently listened on
     counters = deepComputed(() => ({
         first: this.firstCount(),
-        second: this.secondCount()
+        second: this.secondCount(),
+        sum: this.sum(),
     }));
-
-    sum = computed(() => this.calculateSum());
-
-    calculateSum = () => this.firstCount() + this.secondCount();
   
     addToFirst = () => {
       this.firstCount.update((prev) => prev + 1);
