@@ -37,5 +37,5 @@ export const {
     name, // feature name
     reducer, // feature reducer
     selectCounterState, // feature selector
-    selectCounter, // selector for `books` property
+    selectCounter, // selector for `counter` property
   } = counterFeature;
