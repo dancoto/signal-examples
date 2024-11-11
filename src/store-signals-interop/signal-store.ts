@@ -21,7 +21,6 @@ export const CounterSignalStore = signalStore(
         getValueFromService: rxMethod<void>(pipe(
             switchMap(() => counterService.getValueFromService().pipe(tapResponse({
                 next: (val) => {
-                    console.log(val)
                     ngrxStore.dispatch(actions.set(val));
                 },
                 error: () => {
