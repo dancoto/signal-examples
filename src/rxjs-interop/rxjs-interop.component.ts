@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { combineLatest, debounceTime, map, startWith } from 'rxjs';
+import { debounceTime, combineLatest, map, startWith } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'rxjs-interop',
   standalone: true,

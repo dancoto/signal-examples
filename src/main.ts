@@ -9,13 +9,15 @@ import { IndirectComponent } from './indirect/indirect.component';
 import { RxjsInteropComponent } from './rxjs-interop/rxjs-interop.component';
 import { counterFeature } from './store-signals-interop/store';
 import { StoreSignalsInteropComponent } from './store-signals-interop/store-signals-interop.component';
+import { DeepComputedComponent } from './deep-computed/deep-computed.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [IndirectComponent, RxjsInteropComponent, AgGridComponent, StoreSignalsInteropComponent],
+  imports: [IndirectComponent, RxjsInteropComponent, AgGridComponent, StoreSignalsInteropComponent, DeepComputedComponent],
   template: `
       <indirect></indirect>
+      <deep-computed></deep-computed>
       <rxjs-interop></rxjs-interop>
       <store-signals-interop></store-signals-interop>
       <ag-grid></ag-grid>
