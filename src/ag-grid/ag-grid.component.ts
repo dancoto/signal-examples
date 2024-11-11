@@ -1,11 +1,11 @@
 import { Component, effect, signal } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
-import { ColDef, GridReadyEvent, GridApi } from 'ag-grid-community'; // Column Definition Type Interface
+import { AgGridAngular } from 'ag-grid-angular';
+import { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 
 @Component({
   selector: 'ag-grid',
   standalone: true,
-  imports: [AgGridAngular], // Add Angular Data Grid Component
+  imports: [AgGridAngular],
   template: `
   <h1>AG Grid with Signals</h1>
   <ag-grid-angular
@@ -19,13 +19,17 @@ import { ColDef, GridReadyEvent, GridApi } from 'ag-grid-community'; // Column D
 export class AgGridComponent {
   #gridApi!: GridApi<any>;
 
+  // This is our key connection
   gridReady = signal(false);
 
   constructor() {
     // Use an effect to listen to when grid is ready to do your manipulation before sending data to grid
+    // This helps with race conditions where we may be getting data from a source before AG
+    // Grid is ready to render
     effect(() => {
       if (this.gridReady()) {
         this.#gridApi.setGridOption('rowData', this.rowData);
+        this.#gridApi.sizeColumnsToFit()
       }
     });
   }
